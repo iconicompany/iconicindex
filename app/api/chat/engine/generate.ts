@@ -10,7 +10,7 @@ import {
   checkRequiredEnvVars,
 } from "./shared";
 
-dotenv.config();
+dotenv.config({ path: [ `.env.${process.env.NODE_ENV}.local`, '.env.local', `.env.${process.env.NODE_ENV}`, '.env'] });
 
 async function loadAndIndex() {
   // load objects from storage and convert them into LlamaIndex Document objects

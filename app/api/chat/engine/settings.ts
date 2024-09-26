@@ -59,12 +59,18 @@ export const initSettings = async () => {
 function initOpenAI() {
   Settings.llm = new OpenAI({
     model: process.env.MODEL ?? "gpt-4o-mini",
+    additionalSessionOptions: {
+      baseURL: process.env.MODEL_API_BASE
+    },
     maxTokens: process.env.LLM_MAX_TOKENS
       ? Number(process.env.LLM_MAX_TOKENS)
       : undefined,
   });
   Settings.embedModel = new OpenAIEmbedding({
     model: process.env.EMBEDDING_MODEL,
+    additionalSessionOptions: {
+      baseURL: process.env.EMBEDDING_MODEL_API_BASE
+    },
     dimensions: process.env.EMBEDDING_DIM
       ? parseInt(process.env.EMBEDDING_DIM)
       : undefined,
