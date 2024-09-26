@@ -1,4 +1,5 @@
 import * as dotenv from "dotenv";
+import dotenvExpand from "dotenv-expand";
 import { VectorStoreIndex, storageContextFromDefaults } from "llamaindex";
 import { PGVectorStore } from "llamaindex/vector-store/PGVectorStore";
 import { getDocuments } from "./loader";
@@ -10,7 +11,7 @@ import {
   checkRequiredEnvVars,
 } from "./shared";
 
-dotenv.config({ path: [ `.env.${process.env.NODE_ENV}.local`, '.env.local', `.env.${process.env.NODE_ENV}`, '.env'] });
+dotenvExpand.expand(dotenv.config({ path: [ `.env.${process.env.NODE_ENV}.local`, '.env.local', `.env.${process.env.NODE_ENV}`, '.env'] }));
 
 async function loadAndIndex() {
   // load objects from storage and convert them into LlamaIndex Document objects
